@@ -1,0 +1,1511 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>黄瓜影院入口 - 影视聚合与观看指南</title>
+  <meta name="description" content="黄瓜影院入口汇聚院线新片、经典剧集、治愈系电影与悬疑剧集，提供最新更新动态、分类筛选、深度解析和观看路径建议，适合想快速找到可看内容的观众。">
+  <meta name="keywords" content="院线新片聚合,剧集更新动态,悬疑剧集推荐,治愈系电影分类,影视观看指南">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23191b2c'/%3E%3Cpath d='M9 10h14v3H9zM9 16h14v3H9zM9 22h9v3H9z' fill='%23f0c75e'/%3E%3Ccircle cx='24' cy='23.5' r='2.5' fill='%23f0c75e'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0f111a;
+      --surface: #191b2c;
+      --surface-alt: #202339;
+      --border: #2c2f47;
+      --text: #e8eaf0;
+      --text-muted: #9a9db8;
+      --text-dim: #6d7090;
+      --accent: #f0c75e;
+      --accent-soft: rgba(240, 199, 94, 0.12);
+      --accent-2: #5ec8c0;
+      --accent-2-soft: rgba(94, 200, 192, 0.1);
+      --danger: #e06c6c;
+      --radius-s: 6px;
+      --radius-m: 12px;
+      --radius-l: 18px;
+      --shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      --font-sans: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+      --header-h: 64px;
+      --announce-h: 40px;
+      --sticky-offset: calc(var(--header-h) + var(--announce-h) + 12px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; height: auto; object-fit: cover; }
+    ul, ol { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    /* 吸顶公告条 */
+    .announce-bar {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: linear-gradient(90deg, #1e2a3a, #192b2a);
+      border-bottom: 1px solid var(--border);
+      height: var(--announce-h);
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .announce-bar .container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .announce-tag {
+      background: var(--accent);
+      color: #111;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .announce-bar strong { color: var(--accent); }
+    /* 吸顶页头 */
+    .site-header {
+      position: sticky;
+      top: var(--announce-h);
+      z-index: 100;
+      background: rgba(15, 17, 26, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #f0c75e, #5ec8c0);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 17px;
+      color: #111;
+    }
+    .brand-text {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+    .brand-text em { color: var(--accent); font-style: normal; }
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .main-nav a {
+      color: var(--text-muted);
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: var(--radius-s);
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+    .main-nav a:hover, .main-nav a:focus-visible {
+      background: var(--surface-alt);
+      color: var(--accent);
+      text-decoration: none;
+      outline: none;
+    }
+    .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .search-toggle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s;
+    }
+    .search-toggle:hover, .search-toggle:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent);
+      outline: none;
+    }
+    .menu-toggle {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-s);
+      font-size: 18px;
+      align-items: center;
+      justify-content: center;
+    }
+    /* 搜索面板 */
+    .search-panel {
+      display: none;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .search-panel.open { display: block; }
+    .search-panel .container { display: flex; gap: 10px; align-items: center; }
+    .search-panel input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-s);
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 14px;
+    }
+    .search-panel input:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+    .search-panel button {
+      background: var(--accent);
+      border: none;
+      color: #111;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: var(--radius-s);
+      font-size: 14px;
+    }
+    .search-feedback {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 6px 0 0;
+      min-height: 20px;
+    }
+    /* 首屏 */
+    .hero {
+      background: radial-gradient(ellipse at 20% 0%, #1c2540 0%, var(--bg) 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 52px 0 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -60px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(240,199,94,0.08), transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .hero-kicker::before {
+      content: '';
+      width: 22px;
+      height: 2px;
+      background: var(--accent-2);
+      display: inline-block;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-bottom: 28px;
+      line-height: 1.85;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-primary, .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #111;
+    }
+    .btn-primary:hover { background: #f6d67a; text-decoration: none; }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .hero-visual {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 300px;
+      height: 300px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    /* 主布局：双栏标准 */
+    .layout-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 36px;
+      align-items: start;
+      padding: 44px 0 60px;
+    }
+    .main-col { min-width: 0; }
+    .side-col { min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+    /* 板块通用 */
+    .section {
+      margin-bottom: 48px;
+      scroll-margin-top: var(--sticky-offset);
+    }
+    .section:last-child { margin-bottom: 0; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-head h2::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 2px;
+      display: inline-block;
+    }
+    .section-head .more-link {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .section-head .more-link:hover { color: var(--accent); }
+    .section-intro {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    /* 概览 */
+    .overview-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.9;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 24px 26px;
+    }
+    .overview-text p + p { margin-top: 12px; }
+    .overview-text strong { color: var(--accent); font-weight: 600; }
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface-alt); }
+    .card-img img { width: 100%; height: 100%; }
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(15,17,26,0.82);
+      backdrop-filter: blur(4px);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+    .card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .card-title { font-size: 16px; font-weight: 700; color: #fff; line-height: 1.4; }
+    .card-title a { color: inherit; }
+    .card-title a:hover { color: var(--accent); }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--surface-alt);
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag.accent { color: var(--accent); background: var(--accent-soft); }
+    .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; flex: 1; }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 2px;
+    }
+    .card-meta .score { color: var(--accent); font-weight: 700; }
+    /* 更新列表 */
+    .update-list { display: flex; flex-direction: column; }
+    .update-item {
+      display: grid;
+      grid-template-columns: 76px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 13px 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .update-item:last-child { border-bottom: none; }
+    .update-thumb {
+      width: 76px;
+      height: 50px;
+      border-radius: var(--radius-s);
+      overflow: hidden;
+      background: var(--surface-alt);
+      flex-shrink: 0;
+    }
+    .update-thumb img { width: 100%; height: 100%; }
+    .update-info { min-width: 0; }
+    .update-name { font-size: 14px; font-weight: 600; color: #fff; }
+    .update-name a { color: inherit; }
+    .update-name a:hover { color: var(--accent); }
+    .update-desc { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+    .update-time { font-size: 12px; color: var(--text-dim); white-space: nowrap; }
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .category-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 16px 14px;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+      display: block;
+    }
+    .category-item:hover { border-color: var(--accent); background: var(--surface-alt); text-decoration: none; }
+    .category-icon {
+      width: 38px;
+      height: 38px;
+      margin: 0 auto 8px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .category-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .category-count { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+    /* 深度解析 */
+    .article-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 28px 30px;
+    }
+    .article-body h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 26px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .article-body h3:first-child { margin-top: 0; }
+    .article-body p { font-size: 14.5px; color: var(--text-muted); line-height: 1.9; margin-bottom: 12px; }
+    .article-body ul, .article-body ol { margin: 10px 0 14px 20px; }
+    .article-body li { font-size: 14.5px; color: var(--text-muted); line-height: 1.8; margin-bottom: 6px; list-style: disc; }
+    .article-body ol li { list-style: decimal; }
+    .article-body strong { color: var(--text); font-weight: 600; }
+    /* 体验指南 */
+    .guide-steps { display: flex; flex-direction: column; gap: 14px; }
+    .guide-step {
+      display: flex;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 18px 20px;
+    }
+    .guide-num {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 15px;
+      display: grid;
+      place-items: center;
+    }
+    .guide-content h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .guide-content p { font-size: 13.5px; color: var(--text-muted); line-height: 1.75; }
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-list details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 0 20px;
+      transition: border-color 0.2s;
+    }
+    .faq-list details[open] { border-color: var(--accent); }
+    .faq-list summary {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 16px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: '+';
+      color: var(--accent);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .faq-list details[open] summary::after { content: '−'; }
+    .faq-list .faq-answer {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding: 0 0 18px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+    /* 评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .comment-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 14px 16px;
+    }
+    .comment-head { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .comment-nick { font-size: 13px; font-weight: 600; color: var(--text); }
+    .comment-time { font-size: 11px; color: var(--text-dim); margin-left: auto; }
+    .comment-text { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+    /* 资讯 */
+    .news-list { display: flex; flex-direction: column; gap: 14px; }
+    .news-item {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .news-item:hover { border-color: var(--accent); }
+    .news-thumb { width: 132px; height: 100%; min-height: 92px; overflow: hidden; background: var(--surface-alt); }
+    .news-thumb img { width: 100%; height: 100%; }
+    .news-body { padding: 14px 16px 14px 0; min-width: 0; }
+    .news-meta { font-size: 11.5px; color: var(--accent-2); margin-bottom: 4px; }
+    .news-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 5px; line-height: 1.4; }
+    .news-title a { color: inherit; }
+    .news-title a:hover { color: var(--accent); }
+    .news-summary { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+    /* 相关推荐标签索引 */
+    .tag-index { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag-index a {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .tag-index a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+    /* 侧栏 */
+    .side-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      padding: 18px 20px;
+    }
+    .side-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .side-card h3::before { content: ''; width: 3px; height: 15px; background: var(--accent-2); border-radius: 2px; }
+    .rank-list { display: flex; flex-direction: column; gap: 10px; }
+    .rank-item { display: flex; gap: 10px; align-items: flex-start; }
+    .rank-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: var(--surface-alt);
+      color: var(--text-dim);
+      font-size: 11px;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .rank-item:nth-child(1) .rank-num { background: var(--accent); color: #111; }
+    .rank-item:nth-child(2) .rank-num { background: var(--accent-2); color: #111; }
+    .rank-item:nth-child(3) .rank-num { background: #c98e5e; color: #111; }
+    .rank-info { min-width: 0; }
+    .rank-name { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .rank-name a { color: inherit; }
+    .rank-name a:hover { color: var(--accent); }
+    .rank-meta { font-size: 11.5px; color: var(--text-dim); margin-top: 1px; }
+    .timeline { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 16px; }
+    .timeline::before { content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; padding-bottom: 14px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -16px;
+      top: 6px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      border: 2px solid var(--surface);
+    }
+    .timeline-date { font-size: 11px; color: var(--accent-2); font-weight: 600; }
+    .timeline-text { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+    .quick-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .quick-links a {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      background: var(--surface-alt);
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .quick-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    /* 页尾 */
+    .site-footer {
+      background: #0a0c13;
+      border-top: 1px solid var(--border);
+      padding: 44px 0 28px;
+      margin-top: 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-brand .brand { margin-bottom: 12px; }
+    .footer-brand p { font-size: 13px; color: var(--text-dim); line-height: 1.8; max-width: 280px; }
+    .footer-col h4 { font-size: 13px; color: #fff; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { font-size: 13px; color: var(--text-dim); }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .layout-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .side-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-grid { grid-template-columns: repeat(4, 1fr); }
+      .hero-visual { display: none; }
+      .comment-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .main-nav { display: none; }
+      .main-nav.open { display: flex; position: absolute; top: var(--header-h); left: 0; right: 0; background: var(--surface); padding: 12px 24px; flex-direction: column; align-items: stretch; border-bottom: 1px solid var(--border); z-index: 99; }
+      .main-nav.open a { padding: 10px 0; border-bottom: 1px solid var(--border); }
+      .main-nav.open a:last-child { border-bottom: none; }
+      .menu-toggle { display: flex; }
+      .header-inner { position: relative; }
+    }
+    @media (max-width: 740px) {
+      .container { padding: 0 16px; }
+      .side-col { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .news-item { grid-template-columns: 1fr; }
+      .news-thumb { width: 100%; height: 160px; }
+      .news-body { padding: 0 16px 16px; }
+      .update-item { grid-template-columns: 64px 1fr; gap: 10px; }
+      .update-thumb { width: 64px; height: 44px; }
+      .update-time { grid-column: 2; font-size: 11px; }
+      .hero { padding: 36px 0 32px; }
+      .hero h1 { font-size: 30px; }
+      .hero-desc { font-size: 14px; }
+      .article-body { padding: 20px 18px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .brand-text { font-size: 17px; }
+      .search-toggle span { display: none; }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="announce-bar" role="region" aria-label="站点公告">
+    <div class="container">
+      <span class="announce-tag">NEW</span>
+      <span><strong>11 月 8 日</strong> 更新：治愈系片单新增 6 部、悬疑剧集《雾港回声》第 12 集上线、2026 秋季片单专题已开放浏览</span>
+    </div>
+  </div>
+
+  <!-- 吸顶页头 -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/#top" class="brand" aria-label="黄瓜影院入口 首页">
+        <span class="brand-mark" aria-hidden="true">黄</span>
+        <span class="brand-text">黄瓜影院<em>入口</em></span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="主题导航">
+        <a href="/#overview">领域概览</a>
+        <a href="/#featured">精选片单</a>
+        <a href="/#updates">最新更新</a>
+        <a href="/#categories">分类入口</a>
+        <a href="/#deep-dive">深度解析</a>
+        <a href="/#guide">观看指南</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/#comments">用户评论</a>
+      </nav>
+      <div class="header-actions">
+        <button class="search-toggle" id="searchToggle" aria-expanded="false" aria-controls="searchPanel">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <span>搜索片名</span>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="展开导航菜单">☰</button>
+      </div>
+    </div>
+    <div class="search-panel" id="searchPanel">
+      <div class="container">
+        <input type="search" id="searchInput" placeholder="输入片名或类型关键词，如：雾港回声、治愈系、悬疑…" aria-label="搜索页面内容">
+        <button id="searchBtn">查找</button>
+      </div>
+      <div class="container">
+        <div class="search-feedback" id="searchFeedback" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- 首屏 -->
+    <section class="hero" aria-label="主题首屏">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-kicker">院线 · 剧集 · 治愈 · 悬疑</div>
+          <h1>黄瓜影院入口</h1>
+          <p class="hero-desc">从院线新片到口碑剧集，从治愈系电影到悬疑短剧，这里按可看性整理近 30 天热门条目、更新动态与观看路径，帮你先判断一部作品值不值得投入时间。</p>
+          <div class="hero-actions">
+            <a href="/#featured" class="btn-primary">浏览精选片单</a>
+            <a href="/#updates" class="btn-ghost">查看今日更新</a>
+          </div>
+        </div>
+        <svg class="hero-visual" viewBox="0 0 300 300" fill="none" aria-hidden="true">
+          <circle cx="150" cy="150" r="120" stroke="#2c2f47" stroke-width="1"/>
+          <circle cx="150" cy="150" r="90" stroke="#2c2f47" stroke-width="1"/>
+          <rect x="95" y="110" width="110" height="80" rx="8" fill="#191b2c" stroke="#f0c75e" stroke-width="1.5"/>
+          <path d="M120 130h60M120 145h45M120 160h50" stroke="#5ec8c0" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="185" cy="165" r="7" fill="#f0c75e" opacity="0.8"/>
+          <path d="M60 80l15 15M240 80l-15 15M60 220l15-15M240 220l-15-15" stroke="#2c2f47" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <div class="container layout-wrap">
+      <!-- 主内容列 -->
+      <div class="main-col">
+
+        <!-- 1. 主题领域概览 -->
+        <section class="section" id="overview">
+          <div class="section-head">
+            <h2>院线新片与剧集看什么</h2>
+          </div>
+          <div class="overview-text">
+            <p>“黄瓜影院入口”所指的领域，覆盖了当前观众最常接触的几类观看选择：<strong>院线新片</strong>、<strong>口碑剧集</strong>、<strong>治愈系电影</strong>与<strong>悬疑短剧</strong>。院线新片通常以 90—140 分钟的单片形式出现，适合一次性完整观看；剧集则以 6—24 集的篇幅展开，适合按周或按季追更；治愈系电影强调情绪舒缓与生活质感，多出现在周末片单和深夜时段；悬疑短剧靠强情节钩子与反转推进，单集时长常在 25—45 分钟之间。</p>
+            <p>按 2026 年 11 月上旬的更新节奏，院线侧值得留意的是《山谷来信》与《冬日列车》两部现实题材作品，前者以乡村教育为切入点，后者聚焦春运途中的群像；剧集侧《雾港回声》第 12 集已于 11 月 7 日晚更新，接近本季收尾；治愈方向《慢递咖啡馆》与《周末食谱》持续在周末档释放新片段。对第一次接触这个聚合入口的观众来说，先确认自己想看的是<strong>一次性电影</strong>还是<strong>长线剧集</strong>，再按类型标签与更新状态筛选，是最高效的路径。</p>
+          </div>
+        </section>
+
+        <!-- 2. 精选内容推荐 -->
+        <section class="section" id="featured">
+          <div class="section-head">
+            <h2>本周精选片单</h2>
+            <a href="/#categories" class="more-link">按分类浏览 →</a>
+          </div>
+          <p class="section-intro">以下 6 部作品在近 30 天内更新或释出可看信息，按类型与观看门槛整理，适合作为本周片单的起点。</p>
+          <div class="card-grid">
+            <article class="card">
+              <div class="card-img">
+                <img src="https://picsum.photos/seed/shangu-laixin01/400/300" alt="山谷来信 乡村教育题材剧照" width="400" height="300" loading="lazy">
+                <span class="card-badge">院线新片</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">山谷来信</a></h3>
+                <div class="card-tags"><span class="tag accent">现实题材</span><span class="tag">乡村教育</span><span class="tag">群像</span></div>
+                <p class="card-desc">支教老师与三个留守学生的双线叙事，第 40 分钟后的家访段落是全片情绪支点，适合喜欢慢燃现实故事的观众。</p>
+                <div class="card-meta"><span>片长 118 分钟</span><span class="score">8.6 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-img">
+                <img src="https://picsum.photos/seed/dongri-lieche02/400/300" alt="冬日列车 春运群像剧照" width="400" height="300" loading="lazy">
+                <span class="card-badge">院线新片</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">冬日列车</a></h3>
+                <div class="card-tags"><span class="tag accent">剧情</span><span class="tag">春运</span><span class="tag">多线叙事</span></div>
+                <p class="card-desc">一列开往北方的绿皮火车串联起六组乘客，导演用固定机位长镜头呈现车厢空间，适合喜欢观察式叙事的观众。</p>
+                <div class="card-meta"><span>片长 104 分钟</span><span class="score">8.3 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-img">
+                <img src="https://picsum.photos/seed/wugang-huisheng03/400/300" alt="雾港回声 悬疑剧集剧照" width="400" height="300" loading="lazy">
+                <span class="card-badge">热播剧集</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">雾港回声</a></h3>
+                <div class="card-tags"><span class="tag accent">悬疑</span><span class="tag">刑侦</span><span class="tag">12 集</span></div>
+                <p class="card-desc">港口城市连环失踪案牵出十年前旧案，第 8 集起采用双时间线交叉剪辑，适合习惯按集推理的悬疑观众。</p>
+                <div class="card-meta"><span>已更新 12 集</span><span class="score">9.0 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-img">
+                <img src="https://picsum.photos/seed/zuomo-shiguang04/400/300" alt="周末食谱 治愈系电影剧照" width="400" height="300" loading="lazy">
+                <span class="card-badge">治愈系</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">周末食谱</a></h3>
+                <div class="card-tags"><span class="tag accent">治愈</span><span class="tag">美食</span><span class="tag">日常</span></div>
+                <p class="card-desc">一家只在周末营业的家庭餐馆，每集用一道家常菜带出一位常客的故事，适合睡前或周末午后观看。</p>
+                <div class="card-meta"><span>已更新 8 集</span><span class="score">8.8 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-img">
+                <img src="https://picsum.photos/seed/mandi-kafeiguan05/400/300" alt="慢递咖啡馆 治愈系剧集剧照" width="400" height="300" loading="lazy">
+                <span class="card-badge">治愈系</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">慢递咖啡馆</a></h3>
+                <div class="card-tags"><span class="tag accent">治愈</span><span class="tag">书信</span><span class="tag">慢节奏</span></div>
+                <p class="card-desc">替人代写慢递信件的咖啡馆，每集围绕一封寄往未来的信展开，单集 30 分钟，适合通勤或午休时段。</p>
+                <div class="card-meta"><span>已更新 10 集</span><span class="score">8.5 分</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-img">
+                <img src="https://picsum.photos/seed/shenhai-xinhao06/400/300" alt="深海异常信号 悬疑短剧剧照" width="400" height="300" loading="lazy">
+                <span class="card-badge">悬疑短剧</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">深海异常信号</a></h3>
+                <div class="card-tags"><span class="tag accent">悬疑</span><span class="tag">科考</span><span class="tag">6 集</span></div>
+                <p class="card-desc">深海科考站收到重复脉冲信号，六集篇幅内完成从发现到反转的完整闭环，适合一个晚上刷完。</p>
+                <div class="card-meta"><span>全 6 集已上线</span><span class="score">8.7 分</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 3. 最新更新 -->
+        <section class="section" id="updates">
+          <div class="section-head">
+            <h2>近 3 天更新动态</h2>
+          </div>
+          <div class="update-list">
+            <div class="update-item">
+              <div class="update-thumb"><img src="https://picsum.photos/seed/wugang-12ji07/76/50" alt="雾港回声第12集剧照" width="76" height="50" loading="lazy"></div>
+              <div class="update-info">
+                <div class="update-name"><a href="/#featured">雾港回声 第 12 集</a></div>
+                <div class="update-desc">本季终章上线，旧案证据链完成闭合，片尾留出下一季钩子。</div>
+              </div>
+              <span class="update-time">今天 10:00</span>
+            </div>
+            <div class="update-item">
+              <div class="update-thumb"><img src="https://picsum.photos/seed/zuomo-xinji08/76/50" alt="周末食谱新集片段" width="76" height="50" loading="lazy"></div>
+              <div class="update-info">
+                <div class="update-name"><a href="/#featured">周末食谱 第 8 集</a></div>
+                <div class="update-desc">新增“番茄牛腩”一集，常客故事线首次出现跨集呼应。</div>
+              </div>
+              <span class="update-time">昨天 21:10</span>
+            </div>
+            <div class="update-item">
+              <div class="update-thumb"><img src="https://picsum.photos/seed/shangu-dingdang09/76/50" alt="山谷来信定档海报" width="76" height="50" loading="lazy"></div>
+              <div class="update-info">
+                <div class="update-name"><a href="/#featured">山谷来信 定档</a></div>
+                <div class="update-desc">院线定档 11 月 21 日，首支预告片释出，预售通道已开启。</div>
+              </div>
+              <span class="update-time">11 月 7 日</span>
+            </div>
+            <div class="update-item">
+              <div class="update-thumb"><img src="https://picsum.photos/seed/shenhai-quanji10/76/50" alt="深海异常信号全集合集封面" width="76" height="50" loading="lazy"></div>
+              <div class="update-info">
+                <div class="update-name"><a href="/#featured">深海异常信号 全 6 集</a></div>
+                <div class="update-desc">一次性释出完整六集，第 5 集片尾彩蛋补充了信号来源背景。</div>
+              </div>
+              <span class="update-time">11 月 6 日</span>
+            </div>
+            <div class="update-item">
+              <div class="update-thumb"><img src="https://picsum.photos/seed/mandi-di10ji11/76/50" alt="慢递咖啡馆第10集场景" width="76" height="50" loading="lazy"></div>
+              <div class="update-info">
+                <div class="update-name"><a href="/#featured">慢递咖啡馆 第 10 集</a></div>
+                <div class="update-desc">“寄往三年后”信件线收束，主角与老顾客的对话成为本集核心。</div>
+              </div>
+              <span class="update-time">11 月 5 日</span>
+            </div>
+            <div class="update-item">
+              <div class="update-thumb"><img src="https://picsum.photos/seed/dongri-paipian12/76/50" alt="冬日列车预告片截图" width="76" height="50" loading="lazy"></div>
+              <div class="update-info">
+                <div class="update-name"><a href="/#featured">冬日列车 幕后特辑</a></div>
+                <div class="update-desc">导演与摄影指导对谈上线，重点拆解车厢长镜头的调度方式。</div>
+              </div>
+              <span class="update-time">11 月 4 日</span>
+            </div>
+            <div class="update-item">
+              <div class="update-thumb"><img src="https://picsum.photos/seed/qiuji-piandan13/76/50" alt="2026秋季片单专题封面" width="76" height="50" loading="lazy"></div>
+              <div class="update-info">
+                <div class="update-name"><a href="/#categories">2026 秋季片单专题</a></div>
+                <div class="update-desc">专题页新增 6 部治愈系与 4 部现实题材条目，可按评分排序。</div>
+              </div>
+              <span class="update-time">11 月 3 日</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. 分类入口 -->
+        <section class="section" id="categories">
+          <div class="section-head">
+            <h2>按类型找片</h2>
+          </div>
+          <p class="section-intro">分类名称对应用户常搜的类型词，点击进入对应片单区域。</p>
+          <div class="category-grid">
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">悬</div>
+              <div class="category-name">悬疑剧集</div>
+              <div class="category-count">24 部 · 含刑侦/推理</div>
+            </a>
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">愈</div>
+              <div class="category-name">治愈系电影</div>
+              <div class="category-count">31 部 · 含美食/日常</div>
+            </a>
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">院</div>
+              <div class="category-name">院线新片</div>
+              <div class="category-count">18 部 · 近 30 天</div>
+            </a>
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">剧</div>
+              <div class="category-name">口碑剧集</div>
+              <div class="category-count">42 部 · 评分 8.0+</div>
+            </a>
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">短</div>
+              <div class="category-name">悬疑短剧</div>
+              <div class="category-count">15 部 · 6—12 集</div>
+            </a>
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">现</div>
+              <div class="category-name">现实题材</div>
+              <div class="category-count">22 部 · 社会向</div>
+            </a>
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">喜</div>
+              <div class="category-name">轻喜剧</div>
+              <div class="category-count">19 部 · 下饭片单</div>
+            </a>
+            <a href="/#featured" class="category-item">
+              <div class="category-icon">纪</div>
+              <div class="category-name">纪录片</div>
+              <div class="category-count">12 部 · 自然/人文</div>
+            </a>
+          </div>
+        </section>
+
+        <!-- 5. 深度解析正文 -->
+        <section class="section" id="deep-dive">
+          <div class="section-head">
+            <h2>悬疑剧集与治愈系电影怎么选</h2>
+          </div>
+          <div class="article-body">
+            <h3>悬疑剧集的三种推进方式</h3>
+            <p>悬疑剧集并非同一种节奏。按情节推进方式，可大致分为<strong>单元案件型</strong>、<strong>主线谜题型</strong>与<strong>双时间线交叉型</strong>。单元案件型每集或每两集解决一个独立事件，适合碎片时间观看，例如《雾港回声》前六集基本保持“一集一案”的结构；主线谜题型从第一集抛出核心疑问，所有支线服务于同一个答案，中途弃剧容易丢失关键信息；双时间线交叉型则要求观众同时跟进过去与现在两条线索，《雾港回声》第 8 集之后明显转入这一模式。</p>
+            <p>判断一部悬疑剧集是否适合自己，可以先看两个指标：<strong>单集时长</strong>与<strong>钩子密度</strong>。单集 25—35 分钟的短剧通常每集结尾都有明确悬念，适合连续观看；单集 45 分钟以上的长剧更依赖人物关系铺陈，前两集节奏偏慢属于正常现象。以《深海异常信号》为例，六集体量下前两集用大量篇幅建立科考站环境，真正的反转从第 3 集开始，若只看开头容易误判。</p>
+            <h3>治愈系电影的情绪配比</h3>
+            <p>治愈系电影内部差异很大。一类以<strong>美食与日常</strong>为核心，冲突被刻意降低，观看体验接近“陪伴”，如《周末食谱》每集围绕一道菜展开，几乎没有反派；另一类以<strong>书信与时间</strong>为媒介，通过延迟抵达的信息制造轻微遗憾与释然，如《慢递咖啡馆》中寄往未来的信件线。前者适合睡前或用餐时观看，后者更适合周末下午留出完整注意力。</p>
+            <p>需要留意的是，“治愈”标签并不等于“没有冲突”。部分作品会把家庭矛盾、职业倦怠等现实议题放进温和的叙事框架里，例如《周末食谱》第 6 集就处理了常客的失业困境，只是解决方式偏理想化。如果当下需要完全放松，优先选择单集 30 分钟以内、无强情节线的作品；如果希望获得轻度情绪共鸣，可以接受带一点现实重量的治愈系电影。</p>
+            <h3>院线新片的决策依据</h3>
+            <ul>
+              <li><strong>题材匹配度</strong>：现实题材院线新片通常依赖生活经验共鸣，《山谷来信》对乡村教育背景的观众吸引力更强。</li>
+              <li><strong>片长与体力</strong>：110 分钟以上的作品建议预留完整时段；104 分钟的《冬日列车》适合晚间场次。</li>
+              <li><strong>叙事密度</strong>：多线群像需要观众主动拼接信息，若当天注意力有限，优先选择单线叙事作品。</li>
+              <li><strong>口碑参照</strong>：可参考同类型近 30 天条目的评分区间，8.0 分以上通常代表完成度较稳。</li>
+            </ul>
+            <p>把以上三类放在一起比较时，悬疑剧集适合愿意投入连续注意力的观众，治愈系电影适合需要情绪缓冲的时段，院线新片则更适合一次性完整观看的周末安排。三者并不互斥，按观看时段与注意力状态切换，比单纯按类型追更有效率。</p>
+          </div>
+        </section>
+
+        <!-- 6. 体验指南 -->
+        <section class="section" id="guide">
+          <div class="section-head">
+            <h2>第一次看的顺序建议</h2>
+          </div>
+          <p class="section-intro">按内容消费的判断逻辑排列，先确认状态，再挑条目，最后决定是否追更。</p>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="guide-num">1</div>
+              <div class="guide-content">
+                <h4>先确认今晚的注意力时长</h4>
+                <p>只有 30—40 分钟，优先《慢递咖啡馆》或《周末食谱》单集；有完整两小时，选《山谷来信》或《冬日列车》；愿意连续追 3 集以上，再进入《雾港回声》的主线谜题。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-num">2</div>
+              <div class="guide-content">
+                <h4>用前 15 分钟判断条目是否对味</h4>
+                <p>悬疑剧集看前 15 分钟是否抛出明确疑问；治愈系电影看前 15 分钟是否建立舒服的空间感；院线新片看前 15 分钟是否交代清楚人物关系。三项中有一项成立，就值得继续。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-num">3</div>
+              <div class="guide-content">
+                <h4>同类条目横向比较</h4>
+                <p>同为悬疑短剧，《深海异常信号》六集闭环适合一晚刷完，《雾港回声》十二集更依赖周更节奏；同为治愈系，《周末食谱》偏美食，《慢递咖啡馆》偏书信，按喜欢的媒介选择。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-num">4</div>
+              <div class="guide-content">
+                <h4>追更前确认更新节奏</h4>
+                <p>周更剧集适合边看边讨论，完结剧集适合一口气看完。查看更新动态时，优先确认“已更新集数”与“本季是否完结”，避免追到一半卡在断点。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. FAQ -->
+        <section class="section" id="faq">
+          <div class="section-head">
+            <h2>常见问题</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>悬疑剧集一般多久更新一次？</summary>
+              <div class="faq-answer">国内平台悬疑剧集常见两种节奏：每周更新 2—3 集，或一次性放出全季。周更剧如《雾港回声》每周四、周日各更新一集；短剧如《深海异常信号》采用一次性全季上线。追更前先看条目页的更新标注，能避免卡在断点。</div>
+            </details>
+            <details>
+              <summary>治愈系电影和轻喜剧有什么区别？</summary>
+              <div class="faq-answer">治愈系电影的重点是情绪舒缓，冲突通常被弱化，结局偏温和；轻喜剧更依赖笑点密度和对话节奏，情绪起伏更大。前者适合睡前或低能量时段，后者适合需要提神的场合。两者有交集，但判断时优先看“看完想不想立刻再看下一部”。</div>
+            </details>
+            <details>
+              <summary>第一次接触悬疑短剧，从哪部开始比较好？</summary>
+              <div class="faq-answer">建议从六集体量的作品开始，例如《深海异常信号》。六集篇幅下信息量可控，一晚能看完，也不会因为周更中断推理节奏。看完后再进入十二集的《雾港回声》，对多时间线叙事的接受度会更高。</div>
+            </details>
+            <details>
+              <summary>院线新片和流媒体剧集的评判标准一样吗？</summary>
+              <div class="faq-answer">不完全一样。院线新片更依赖单次观看的完整度，片长、节奏和视听完成度权重更高；剧集可以靠多集铺陈人物，单集质量波动容忍度更大。比较时，院线侧看“两小时内是否讲清楚”，剧集侧看“连续三集是否保持吸引力”。</div>
+            </details>
+            <details>
+              <summary>《雾港回声》和《深海异常信号》有什么区别？</summary>
+              <div class="faq-answer">《雾港回声》是十二集刑侦悬疑，双时间线交叉，依赖周更追看和前后信息拼接；《深海异常信号》是六集科考悬疑，单线推进，一次性释出，适合一晚看完。前者重人物关系，后者重谜题闭环，按可投入的时间选择即可。</div>
+            </details>
+            <details>
+              <summary>治愈系片单里有没有适合全家一起看的？</summary>
+              <div class="faq-answer">《周末食谱》冲突最弱，单集围绕一道家常菜展开，适合全家观看；《慢递咖啡馆》书信主题偏安静，年龄较小的观众可能觉得节奏慢。如果希望有讨论空间，可以选《周末食谱》中涉及家庭关系的第 6 集。</div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 8. 用户评论 -->
+        <section class="section" id="comments">
+          <div class="section-head">
+            <h2>观众怎么说</h2>
+          </div>
+          <div class="comment-grid">
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">林</span><span class="comment-nick">林间有风</span><span class="comment-time">今天 09:42</span></div>
+              <p class="comment-text">《雾港回声》第 12 集收得比预期稳，旧案证据链没有硬凑，片尾那个镜头给下一季留了空间。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">陈</span><span class="comment-nick">陈小满</span><span class="comment-time">今天 08:15</span></div>
+              <p class="comment-text">《周末食谱》第 8 集的番茄牛腩拍得太舒服了，常客故事线居然跨集呼应，有点意外。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">赵</span><span class="comment-nick">赵一半</span><span class="comment-time">昨天 22:30</span></div>
+              <p class="comment-text">《深海异常信号》六集一个晚上刷完，第 3 集反转之后节奏明显加快，前面两集铺垫确实有点长。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">周</span><span class="comment-nick">周周不加班</span><span class="comment-time">昨天 20:08</span></div>
+              <p class="comment-text">《慢递咖啡馆》适合下班后看，单集 30 分钟刚好，第 10 集那封信的处理比前面几集更克制。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">吴</span><span class="comment-nick">吴所谓</span><span class="comment-time">11 月 7 日</span></div>
+              <p class="comment-text">《山谷来信》预告片里家访那段很有劲，定档 11 月 21 日，已经加进周末计划。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">郑</span><span class="comment-nick">郑在看</span><span class="comment-time">11 月 7 日</span></div>
+              <p class="comment-text">《冬日列车》的车厢长镜头值得单独看，但多线群像对注意力要求不低，建议精神好的时候看。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">孙</span><span class="comment-nick">孙慢慢</span><span class="comment-time">11 月 6 日</span></div>
+              <p class="comment-text">治愈系片单里《周末食谱》和《慢递咖啡馆》都追了，前者偏美食，后者偏情绪，按当天状态挑就行。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">钱</span><span class="comment-nick">钱多多</span><span class="comment-time">11 月 6 日</span></div>
+              <p class="comment-text">《雾港回声》第 8 集转入双时间线之后有点挑观众，建议前七集连着看，信息能对上。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">冯</span><span class="comment-nick">冯七</span><span class="comment-time">11 月 5 日</span></div>
+              <p class="comment-text">《深海异常信号》第 5 集的彩蛋补了信号来源，正片里没讲透的部分算是圆回来了。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">褚</span><span class="comment-nick">褚小北</span><span class="comment-time">11 月 5 日</span></div>
+              <p class="comment-text">秋季片单专题里治愈系新增了 6 部，按评分排完序之后好挑多了，不用一部部点开。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">卫</span><span class="comment-nick">卫什么</span><span class="comment-time">11 月 4 日</span></div>
+              <p class="comment-text">《冬日列车》幕后特辑里导演讲车厢调度的部分很实在，看完正片再回看这段收获更大。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">蒋</span><span class="comment-nick">蒋道理</span><span class="comment-time">11 月 4 日</span></div>
+              <p class="comment-text">悬疑短剧六集体量确实友好，十二集的《雾港回声》追到第 9 集有点等不及，还是完结再刷舒服。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">沈</span><span class="comment-nick">沈知秋</span><span class="comment-time">11 月 3 日</span></div>
+              <p class="comment-text">《周末食谱》第 6 集处理失业那段比想象中重一点，但解决方式偏理想化，看的时候心里有数就好。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">韩</span><span class="comment-nick">韩梅梅</span><span class="comment-time">11 月 3 日</span></div>
+              <p class="comment-text">第一次看悬疑短剧就是从《深海异常信号》开始的，六集看完没有压力，准备接着看《雾港回声》。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-head"><span class="comment-avatar">杨</span><span class="comment-nick">杨不急</span><span class="comment-time">11 月 2 日</span></div>
+              <p class="comment-text">《慢递咖啡馆》和《周末食谱》都在追，前者适合睡前，后者适合吃饭时看，刚好错开。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. 相关资讯 -->
+        <section class="section" id="news">
+          <div class="section-head">
+            <h2>影视动态</h2>
+          </div>
+          <div class="news-list">
+            <article class="news-item">
+              <div class="news-thumb"><img src="https://picsum.photos/seed/shangu-dingdang14/600/400" alt="山谷来信定档发布会现场" width="600" height="400" loading="lazy"></div>
+              <div class="news-body">
+                <div class="news-meta">2026-11-08</div>
+                <h3 class="news-title"><a href="/#featured">《山谷来信》定档 11 月 21 日，首支预告释出</a></h3>
+                <p class="news-summary">现实题材院线新片公布上映日期，预告片重点展示家访段落与三个学生的支线，预售同步开启。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb"><img src="https://picsum.photos/seed/wugang-shouguan15/600/400" alt="雾港回声收官讨论截图" width="600" height="400" loading="lazy"></div>
+              <div class="news-body">
+                <div class="news-meta">2026-11-07</div>
+                <h3 class="news-title"><a href="/#featured">《雾港回声》第 12 集上线，双时间线收束</a></h3>
+                <p class="news-summary">本季终章补齐十年前旧案的关键证据，社区讨论集中在片尾镜头的解读与下一季走向。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb"><img src="https://picsum.photos/seed/shenhai-quanji16/600/400" alt="深海异常信号全季上线海报" width="600" height="400" loading="lazy"></div>
+              <div class="news-body">
+                <div class="news-meta">2026-11-06</div>
+                <h3 class="news-title"><a href="/#featured">《深海异常信号》全 6 集一次性上线</a></h3>
+                <p class="news-summary">科考悬疑短剧采用全集放出模式，第 5 集片尾彩蛋补充信号来源背景，适合一晚刷完。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb"><img src="https://picsum.photos/seed/qiuji-zhuanti17/600/400" alt="秋季片单专题页面截图" width="600" height="400" loading="lazy"></div>
+              <div class="news-body">
+                <div class="news-meta">2026-11-03</div>
+                <h3 class="news-title"><a href="/#categories">2026 秋季片单专题新增 6 部治愈系条目</a></h3>
+                <p class="news-summary">专题页新增治愈系与现实题材条目，支持按评分与更新状态排序，方便快速定位可看内容。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb"><img src="https://picsum.photos/seed/dongri-muhou18/600/400" alt="冬日列车幕后特辑画面" width="600" height="400" loading="lazy"></div>
+              <div class="news-body">
+                <div class="news-meta">2026-10-30</div>
+                <h3 class="news-title"><a href="/#featured">《冬日列车》幕后特辑上线，拆解车厢长镜头</a></h3>
+                <p class="news-summary">导演与摄影指导对谈四十余分钟，重点讲解绿皮火车空间内的固定机位与群像调度方法。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb"><img src="https://picsum.photos/seed/mandi-xinji19/600/400" alt="慢递咖啡馆新集场景" width="600" height="400" loading="lazy"></div>
+              <div class="news-body">
+                <div class="news-meta">2026-10-28</div>
+                <h3 class="news-title"><a href="/#featured">《慢递咖啡馆》第 10 集上线，书信线收束</a></h3>
+                <p class="news-summary">“寄往三年后”信件线在本集完成收束，主角与老顾客的对话成为单集情绪核心。</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 10. 相关推荐 -->
+        <section class="section" id="related">
+          <div class="section-head">
+            <h2>延伸方向</h2>
+          </div>
+          <p class="section-intro">按内容方向与具体条目延伸，适合看完当前片单后继续找片。</p>
+          <div class="tag-index">
+            <a href="/#featured">刑侦悬疑剧集</a>
+            <a href="/#featured">美食治愈片单</a>
+            <a href="/#featured">书信题材电影</a>
+            <a href="/#featured">多线群像院线片</a>
+            <a href="/#featured">科考悬疑短剧</a>
+            <a href="/#featured">乡村教育现实题材</a>
+            <a href="/#featured">周末下饭剧集</a>
+            <a href="/#featured">双时间线推理剧</a>
+          </div>
+        </section>
+
+        <!-- 11. 补充板块：本周热榜 -->
+        <section class="section" id="ranking">
+          <div class="section-head">
+            <h2>本周观看热度参考</h2>
+          </div>
+          <div class="side-card" style="padding: 6px 20px;">
+            <div class="rank-list">
+              <div class="rank-item">
+                <span class="rank-num">1</span>
+                <div class="rank-info">
+                  <div class="rank-name"><a href="/#featured">雾港回声 第 12 集</a></div>
+                  <div class="rank-meta">悬疑剧集 · 今日更新 · 评分 9.0</div>
+                </div>
+              </div>
+              <div class="rank-item">
+                <span class="rank-num">2</span>
+                <div class="rank-info">
+                  <div class="rank-name"><a href="/#featured">深海异常信号 全 6 集</a></div>
+                  <div class="rank-meta">悬疑短剧 · 11 月 6 日上线 · 评分 8.7</div>
+                </div>
+              </div>
+              <div class="rank-item">
+                <span class="rank-num">3</span>
+                <div class="rank-info">
+                  <div class="rank-name"><a href="/#featured">周末食谱 第 8 集</a></div>
+                  <div class="rank-meta">治愈系 · 昨日更新 · 评分 8.8</div>
+                </div>
+              </div>
+              <div class="rank-item">
+                <span class="rank-num">4</span>
+                <div class="rank-info">
+                  <div class="rank-name"><a href="/#featured">山谷来信 预告片</a></div>
+                  <div class="rank-meta">院线新片 · 11 月 21 日上映 · 评分 8.6</div>
+                </div>
+              </div>
+              <div class="rank-item">
+                <span class="rank-num">5</span>
+                <div class="rank-info">
+                  <div class="rank-name"><a href="/#featured">慢递咖啡馆 第 10 集</a></div>
+                  <div class="rank-meta">治愈系 · 11 月 5 日更新 · 评分 8.5</div>
+                </div>
+              </div>
+              <div class="rank-item">
+                <span class="rank-num">6</span>
+                <div class="rank-info">
+                  <div class="rank-name"><a href="/#featured">冬日列车 幕后特辑</a></div>
+                  <div class="rank-meta">院线新片 · 10 月 30 日上线 · 评分 8.3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 侧栏 -->
+      <aside class="side-col" aria-label="辅助信息">
+        <div class="side-card">
+          <h3>今日更新速览</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">今天 10:00</div>
+              <div class="timeline-text">《雾港回声》第 12 集 · 本季终章</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">昨天 21:10</div>
+              <div class="timeline-text">《周末食谱》第 8 集 · 番茄牛腩篇</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">11 月 7 日</div>
+              <div class="timeline-text">《山谷来信》定档 11 月 21 日</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">11 月 6 日</div>
+              <div class="timeline-text">《深海异常信号》全 6 集上线</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">11 月 5 日</div>
+              <div class="timeline-text">《慢递咖啡馆》第 10 集更新</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>热门类型入口</h3>
+          <div class="quick-links">
+            <a href="/#featured">悬疑剧集</a>
+            <a href="/#featured">治愈系电影</a>
+            <a href="/#featured">院线新片</a>
+            <a href="/#featured">口碑剧集</a>
+            <a href="/#featured">悬疑短剧</a>
+            <a href="/#featured">现实题材</a>
+            <a href="/#featured">轻喜剧</a>
+            <a href="/#featured">纪录片</a>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>评分参考区间</h3>
+          <div class="rank-list">
+            <div class="rank-item">
+              <span class="rank-num" style="background:var(--accent);color:#111;">9.0+</span>
+              <div class="rank-info">
+                <div class="rank-name">第一梯队</div>
+                <div class="rank-meta">完成度高，可直接看</div>
+              </div>
+            </div>
+            <div class="rank-item">
+              <span class="rank-num" style="background:var(--accent-2);color:#111;">8.5—8.9</span>
+              <div class="rank-info">
+                <div class="rank-name">第二梯队</div>
+                <div class="rank-meta">类型稳定，按喜好选</div>
+              </div>
+            </div>
+            <div class="rank-item">
+              <span class="rank-num">8.0—8.4</span>
+              <div class="rank-info">
+                <div class="rank-name">第三梯队</div>
+                <div class="rank-meta">有亮点，注意叙事门槛</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/#top" class="brand">
+            <span class="brand-mark" aria-hidden="true">黄</span>
+            <span class="brand-text">黄瓜影院<em>入口</em></span>
+          </a>
+          <p>聚合院线新片、口碑剧集、治愈系电影与悬疑短剧的观看参考，按更新动态与类型差异整理可看内容。</p>
+        </div>
+        <div class="footer-col">
+          <h4>内容分类</h4>
+          <ul>
+            <li><a href="/#featured">悬疑剧集</a></li>
+            <li><a href="/#featured">治愈系电影</a></li>
+            <li><a href="/#featured">院线新片</a></li>
+            <li><a href="/#featured">悬疑短剧</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>浏览引导</h4>
+          <ul>
+            <li><a href="/#overview">领域概览</a></li>
+            <li><a href="/#updates">最新更新</a></li>
+            <li><a href="/#guide">观看顺序</a></li>
+            <li><a href="/#faq">常见问题</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>热点条目</h4>
+          <ul>
+            <li><a href="/#featured">雾港回声</a></li>
+            <li><a href="/#featured">深海异常信号</a></li>
+            <li><a href="/#featured">周末食谱</a></li>
+            <li><a href="/#featured">山谷来信</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 黄瓜影院入口 · 内容聚合示例页</span>
+        <span>部分内容为示例数据，仅用于展示页面结构</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      // 搜索面板
+      var searchToggle = document.getElementById('searchToggle');
+      var searchPanel = document.getElementById('searchPanel');
+      var searchInput = document.getElementById('searchInput');
+      var searchBtn = document.getElementById('searchBtn');
+      var searchFeedback = document.getElementById('searchFeedback');
+
+      searchToggle.addEventListener('click', function() {
+        var isOpen = searchPanel.classList.toggle('open');
+        searchToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen) searchInput.focus();
+      });
+
+      function doSearch() {
+        var q = searchInput.value.trim().toLowerCase();
+        if (!q) {
+          searchFeedback.textContent = '请输入片名或类型关键词，例如：雾港回声、治愈系、悬疑。';
+          return;
+        }
+        var cards = document.querySelectorAll('.card');
+        var hits = 0;
+        cards.forEach(function(card) {
+          var text = card.textContent.toLowerCase();
+          if (text.indexOf(q) !== -1) {
+            card.style.display = '';
+            hits++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        // 更新列表也参与查找
+        var items = document.querySelectorAll('.update-item');
+        items.forEach(function(item) {
+          var text = item.textContent.toLowerCase();
+          item.style.display = (text.indexOf(q) !== -1) ? '' : 'none';
+        });
+        if (hits === 0) {
+          searchFeedback.textContent = '未找到与“' + q + '”匹配的片单条目，可尝试缩短关键词或浏览分类入口。';
+        } else {
+          searchFeedback.textContent = '找到 ' + hits + ' 个相关条目，已高亮显示。';
+        }
+      }
+
+      searchBtn.addEventListener('click', doSearch);
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+      });
+
+      // 移动端菜单
+      var menuToggle = document.getElementById('menuToggle');
+      var mainNav = document.getElementById('mainNav');
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+          var isOpen = mainNav.classList.toggle('open');
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+    })();
+  </script>
+</body>
+  </html>
