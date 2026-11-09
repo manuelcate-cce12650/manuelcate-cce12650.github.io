@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>懂片帝 - 影视解读与片单速览</title>
+<meta name="description" content="懂片帝汇聚院线新片、经典老片、剧集与纪录片的深度解读与选片指南，提供具体片单、观影顺序和类型对比，适合想快速判断一部片是否值得看的观众。">
+<meta name="keywords" content="影视解读,院线新片,经典老片,剧集推荐,观影指南,类型对比">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23151a2e'/%3E%3Cpath d='M18 20h28v6H18zm0 11h28v6H18zm0 11h18v6H18z' fill='%23f2c14e'/%3E%3Ccircle cx='50' cy='46' r='7' fill='%23e0563f'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0f1320;
+  --bg-soft:#151a2e;
+  --panel:#1b2237;
+  --panel-2:#222b45;
+  --line:#2c3550;
+  --text:#e8ecf6;
+  --muted:#9aa5c0;
+  --gold:#f2c14e;
+  --red:#e0563f;
+  --teal:#4fc3b0;
+  --radius:14px;
+  --radius-sm:8px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --max:1360px;
+  --head-h:112px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.75;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+p{margin:0 0 12px}
+ul{margin:0;padding-left:20px}
+section{scroll-margin-top:calc(var(--head-h) + 16px)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* 吸顶公告条 + 页头 */
+.sticky-top{position:sticky;top:0;z-index:50}
+.announce{
+  background:linear-gradient(90deg,#1e2a4a,#2a1f3d);
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+  color:#d6dcf0;
+}
+.announce .wrap{display:flex;align-items:center;gap:14px;min-height:38px;flex-wrap:wrap}
+.announce strong{color:var(--gold)}
+.announce .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(79,195,176,.18)}
+.announce .new{color:var(--red);font-weight:700}
+.site-head{
+  background:rgba(15,19,32,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.head-inner{display:flex;align-items:center;gap:26px;min-height:74px}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand-mark{width:42px;height:42px;flex:0 0 auto}
+.brand-text{font-size:22px;font-weight:800;letter-spacing:1px;color:var(--text)}
+.brand-text em{color:var(--gold);font-style:normal}
+.main-nav{display:flex;gap:4px;flex-wrap:wrap;flex:1}
+.main-nav a{padding:7px 12px;border-radius:999px;font-size:14px;color:var(--muted);transition:.2s}
+.main-nav a:hover,.main-nav a:focus-visible{background:var(--panel-2);color:var(--gold);outline:none}
+.head-search{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 14px}
+.head-search input{background:transparent;border:0;color:var(--text);width:150px;font-size:13px;outline:none}
+.head-search input::placeholder{color:#6d789a}
+.head-search button{
+  background:var(--gold);color:#1a1a1a;border:0;border-radius:999px;
+  padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer
+}
+.head-search button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* 首屏 */
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(900px 380px at 88% -10%,rgba(224,86,63,.22),transparent 60%),
+    radial-gradient(700px 320px at 6% 8%,rgba(79,195,176,.16),transparent 62%),
+    linear-gradient(180deg,#141a2d,#0f1320);
+  border-bottom:1px solid var(--line);
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:58px 0 62px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:2px;color:var(--teal);border:1px solid rgba(79,195,176,.35);padding:4px 12px;border-radius:999px;margin-bottom:18px}
+.hero h1{font-size:clamp(34px,4.4vw,54px);letter-spacing:2px;margin-bottom:16px}
+.hero h1 span{color:var(--gold)}
+.hero-lead{color:#c3cbe0;font-size:16px;max-width:640px;margin-bottom:24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid transparent;transition:.2s;cursor:pointer}
+.btn-primary{background:var(--gold);color:#191919}
+.btn-primary:hover{background:#ffd76b}
+.btn-ghost{border-color:var(--line);color:var(--text);background:var(--panel)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:30px;flex-wrap:wrap}
+.hero-stats div{font-size:13px;color:var(--muted)}
+.hero-stats b{display:block;font-size:22px;color:var(--text)}
+.hero-stats b i{font-style:normal;color:var(--gold)}
+.hero-art{position:relative;min-height:300px}
+.hero-art svg{width:100%;height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.5))}
+
+/* 三栏门户 */
+.layout{display:grid;grid-template-columns:180px minmax(0,1fr) 268px;gap:26px;padding:34px 0 60px}
+.channel-col{position:relative}
+.side-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 14px;margin-bottom:18px}
+.side-card h4{font-size:13px;letter-spacing:1px;color:var(--muted);margin-bottom:12px;font-weight:600}
+.chan-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
+.chan-list a{display:flex;justify-content:space-between;gap:6px;padding:7px 9px;border-radius:var(--radius-sm);font-size:14px;color:#c7cfe4;transition:.18s}
+.chan-list a:hover,.chan-list a:focus-visible{background:var(--panel-2);color:var(--gold);outline:none}
+.chan-list a small{color:#6d789a;font-size:12px}
+
+/* 板块通用 */
+.block{margin-bottom:42px}
+.block-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.block-head h2{font-size:23px;letter-spacing:.5px}
+.block-head h2::before{content:"";display:inline-block;width:5px;height:19px;background:var(--gold);border-radius:3px;margin-right:10px;vertical-align:-2px}
+.block-sub{color:var(--muted);font-size:13.5px;margin-bottom:18px}
+
+/* 概览 */
+.overview{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px}
+.overview p{color:#cfd6e8;font-size:15px}
+.overview strong{color:var(--gold);font-weight:700}
+
+/* 精选卡片 */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px}
+.film-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.22s;min-width:0}
+.film-card:hover{transform:translateY(-4px);border-color:#3c4870;box-shadow:var(--shadow)}
+.film-card .cover{position:relative;aspect-ratio:4/3;overflow:hidden;background:#0d1120}
+.film-card .cover img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.film-card:hover .cover img{transform:scale(1.05)}
+.badge{position:absolute;top:9px;left:9px;background:rgba(15,19,32,.85);border:1px solid var(--line);color:var(--gold);font-size:11px;padding:2px 8px;border-radius:999px}
+.heat{position:absolute;bottom:9px;right:9px;background:rgba(224,86,63,.9);color:#fff;font-size:11px;padding:2px 8px;border-radius:999px}
+.film-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:7px;flex:1}
+.film-body h3{font-size:15.5px;letter-spacing:.3px}
+.film-type{font-size:12px;color:var(--teal)}
+.film-body p{font-size:13px;color:#a9b3cc;margin:0;line-height:1.6}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{font-size:11px;background:var(--panel-2);color:#b9c2da;border-radius:6px;padding:2px 8px;border:1px solid #2f3a58}
+.film-meta{display:flex;justify-content:space-between;font-size:12px;color:#7e89aa;border-top:1px dashed #2c3550;padding-top:8px;margin-top:4px}
+.score{color:var(--gold);font-weight:700}
+
+/* 更新列表 */
+.update-list{list-style:none;padding:0;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.update-list li{display:grid;grid-template-columns:96px 1fr auto;gap:14px;align-items:center;padding:12px 18px;border-bottom:1px solid #232c45;font-size:14px}
+.update-list li:last-child{border-bottom:0}
+.update-list .time{color:#7e89aa;font-size:12.5px}
+.update-list .name{font-weight:600;color:#e2e8f6}
+.update-list .name em{font-style:normal;color:var(--gold);font-size:12px;margin-left:8px}
+.update-list .desc{color:#a9b3cc;font-size:13px;grid-column:2/4}
+.update-list .kind{font-size:11px;color:var(--teal);border:1px solid rgba(79,195,176,.3);padding:1px 8px;border-radius:999px;white-space:nowrap}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.cat-item{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;transition:.2s;display:block}
+.cat-item:hover{border-color:var(--gold);background:var(--panel-2)}
+.cat-item b{display:block;font-size:15px;margin-bottom:4px}
+.cat-item span{font-size:12px;color:#8590af}
+
+/* 深度解析 */
+.article{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:28px 30px}
+.article h2{font-size:23px;margin-bottom:6px}
+.article h2::before{content:"";display:inline-block;width:5px;height:19px;background:var(--red);border-radius:3px;margin-right:10px;vertical-align:-2px}
+.article h3{font-size:17px;color:var(--gold);margin:24px 0 10px}
+.article p{color:#cfd6e8;font-size:14.5px}
+.article ul{color:#cfd6e8;font-size:14.5px;margin-bottom:12px}
+.article li{margin-bottom:6px}
+.callout{border-left:3px solid var(--teal);background:#17202f;padding:12px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:14px;color:#bcc6dc;margin:14px 0}
+
+/* 体验指南 步骤 */
+.steps{display:grid;gap:14px}
+.step{display:grid;grid-template-columns:46px 1fr;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.step .num{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#d9a12c);color:#1a1a1a;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:17px}
+.step h3{font-size:15.5px;margin-bottom:4px}
+.step p{font-size:13.5px;color:#aab4cd;margin:0}
+
+/* FAQ */
+.faq{display:grid;gap:10px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:0 18px;overflow:hidden}
+details[open]{border-color:#3a4667;background:var(--panel-2)}
+summary{cursor:pointer;padding:14px 0;font-weight:600;font-size:14.5px;list-style:none;position:relative;padding-right:26px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:12px;color:var(--gold);font-size:18px;font-weight:400}
+details[open] summary::after{content:"−"}
+details p{font-size:13.5px;color:#adb7d0;padding-bottom:14px;margin:0}
+
+/* 评论 */
+.comments{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.cmt{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px}
+.cmt-head{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#33405f,#4a3a5e);color:var(--gold);font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto}
+.cmt-head b{font-size:13px;color:#dbe2f2}
+.cmt-head time{font-size:11px;color:#6d789a;margin-left:auto}
+.cmt p{font-size:13px;color:#a9b3cc;margin:0}
+.cmt p b{color:var(--gold);font-weight:600}
+
+/* 资讯 */
+.news-list{display:grid;gap:12px}
+.news-item{display:grid;grid-template-columns:132px 1fr;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.2s}
+.news-item:hover{border-color:#3c4870}
+.news-item img{width:132px;height:100%;min-height:96px;object-fit:cover}
+.news-body{padding:12px 16px 12px 0}
+.news-body h3{font-size:15px;margin-bottom:5px}
+.news-body .date{font-size:12px;color:var(--teal);margin-bottom:4px}
+.news-body p{font-size:13px;color:#a2adc7;margin:0}
+
+/* 相关推荐 */
+.rec-tags{display:flex;flex-wrap:wrap;gap:10px}
+.rec-tags a{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13.5px;color:#c3cbe0;transition:.18s}
+.rec-tags a:hover,.rec-tags a:focus-visible{border-color:var(--gold);color:var(--gold);outline:none}
+
+/* 榜单 + 时间线 */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.rank-list{list-style:none;padding:0;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.rank-list li{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid #232c45;font-size:14px}
+.rank-list li:last-child{border-bottom:0}
+.rank-no{width:22px;height:22px;border-radius:6px;background:var(--panel-2);color:#9aa5c0;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.rank-list li:nth-child(1) .rank-no{background:var(--gold);color:#1a1a1a}
+.rank-list li:nth-child(2) .rank-no{background:#c9cdd8;color:#1a1a1a}
+.rank-list li:nth-child(3) .rank-no{background:#c08552;color:#1a1a1a}
+.rank-list .rk-name{font-weight:600}
+.rank-list .rk-type{font-size:12px;color:#7e89aa;margin-left:auto}
+.timeline{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;position:relative}
+.tl-item{position:relative;padding:0 0 16px 22px;border-left:1px solid #33405f}
+.tl-item:last-child{border-left-color:transparent;padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-5px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(79,195,176,.15)}
+.tl-item b{font-size:14px;display:block}
+.tl-item span{font-size:12px;color:#7e89aa}
+
+/* 右栏 */
+.rank-mini{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.rank-mini li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#c3cbe0}
+.rank-mini .no{color:var(--gold);font-weight:800;font-size:13px;width:16px;flex:0 0 auto}
+.rank-mini small{display:block;color:#7e89aa;font-size:11.5px}
+.quick-links{display:flex;flex-direction:column;gap:8px}
+.quick-links a{font-size:13.5px;color:#b9c2da;padding:5px 0;border-bottom:1px dashed #2a3350}
+.quick-links a:hover{color:var(--gold)}
+
+/* 页尾 */
+.site-foot{background:#0b0f1a;border-top:1px solid var(--line);padding:40px 0 26px;margin-top:20px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:26px}
+.foot-brand p{font-size:13px;color:#8590af;margin:10px 0 0;max-width:300px}
+.foot-col h4{font-size:13px;color:var(--text);margin-bottom:10px;letter-spacing:.5px}
+.foot-col a{display:block;font-size:13px;color:#8590af;padding:3px 0}
+.foot-col a:hover{color:var(--gold)}
+.foot-bottom{border-top:1px solid #1d2439;padding-top:16px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12px;color:#6d789a}
+
+/* 响应式 */
+@media (max-width:1100px){
+  .layout{grid-template-columns:170px minmax(0,1fr)}
+  .aside-right{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero-art{min-height:0}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .head-inner{flex-wrap:wrap;gap:10px;padding:10px 0;min-height:0}
+  .main-nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  .main-nav a{white-space:nowrap}
+  .head-search{margin-left:auto}
+  .layout{grid-template-columns:1fr}
+  .channel-col{order:2}
+  .main-col{order:1}
+  .aside-right{display:block;order:3}
+  .chan-list{flex-direction:row;overflow-x:auto;gap:6px}
+  .chan-list a{white-space:nowrap}
+  .two-col{grid-template-columns:1fr}
+}
+@media (max-width:740px){
+  .wrap{padding:0 16px}
+  .hero-grid{padding:38px 0 42px}
+  .hero-stats{gap:20px}
+  .card-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .update-list li{grid-template-columns:1fr;gap:4px;padding:12px 14px}
+  .update-list .desc{grid-column:1}
+  .update-list .kind{justify-self:start}
+  .news-item{grid-template-columns:1fr}
+  .news-item img{width:100%;height:150px}
+  .news-body{padding:12px 16px}
+  .article{padding:20px 18px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:22px}
+  .head-search input{width:100px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-top">
+  <div class="announce">
+    <div class="wrap">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>本周新增 14 条片单</strong>：院线 11 月档、悬疑剧集与华语经典修复版更新</span>
+      <span class="new">11 月 8 日 · 《雾港回声》第 6 集上线</span>
+    </div>
+  </div>
+
+  <header class="site-head">
+    <div class="wrap head-inner">
+      <a class="brand" href="/#hero" aria-label="懂片帝首页">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#151a2e" stroke="#2c3550"/>
+          <path d="M15 19h34v7H15zm0 11h34v7H15zm0 11h21v7H15z" fill="#f2c14e"/>
+          <circle cx="49" cy="46" r="7" fill="#e0563f"/>
+          <path d="M46.5 46l2 2 3.5-4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-text">懂片<em>帝</em></span>
+      </a>
+      <nav class="main-nav" aria-label="主题导航">
+        <a href="/#overview">影视概览</a>
+        <a href="/#picks">精选片单</a>
+        <a href="/#updates">更新动态</a>
+        <a href="/#cats">类型导航</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#guide">观影指南</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#news">相关资讯</a>
+      </nav>
+      <div class="head-search">
+        <input id="siteSearch" type="search" placeholder="搜索片名 / 类型" aria-label="站内搜索片名或类型">
+        <button type="button" id="searchBtn">查找</button>
+      </div>
+    </div>
+  </header>
+</div>
+
+<!-- 首屏 -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="hero-tag">FILM · SERIES · DOCUMENTARY</span>
+      <h1>懂片帝</h1>
+      <p class="hero-lead">汇聚院线新片、经典修复老片、悬疑剧集与纪录片的深度解读。每一条片单都交代清楚类型、看点、口碑和适合谁看，帮你在两分钟里判断一部片值不值得投入两小时。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/#picks">看精选片单</a>
+        <a class="btn btn-ghost" href="/#guide">按顺序观影</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>186<i>+</i></b>在库片目解读</div>
+        <div><b>47</b>本周更新条目</div>
+        <div><b>11</b>细分类型频道</div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 420 320" role="presentation">
+        <defs>
+          <linearGradient id="reelG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f2c14e"/><stop offset="1" stop-color="#e0563f"/>
+          </linearGradient>
+        </defs>
+        <rect x="18" y="30" width="384" height="250" rx="18" fill="#151a2e" stroke="#2c3550"/>
+        <rect x="40" y="52" width="200" height="120" rx="10" fill="#1b2237" stroke="#2c3550"/>
+        <path d="M96 86l48 26-48 26z" fill="#f2c14e"/>
+        <rect x="40" y="186" width="200" height="10" rx="5" fill="#2c3550"/>
+        <rect x="40" y="206" width="140" height="10" rx="5" fill="#2c3550"/>
+        <rect x="40" y="226" width="170" height="10" rx="5" fill="#2c3550"/>
+        <circle cx="320" cy="150" r="62" fill="none" stroke="url(#reelG)" stroke-width="10"/>
+        <circle cx="320" cy="150" r="16" fill="#e0563f"/>
+        <circle cx="320" cy="106" r="9" fill="#1b2237" stroke="#f2c14e" stroke-width="3"/>
+        <circle cx="320" cy="194" r="9" fill="#1b2237" stroke="#f2c14e" stroke-width="3"/>
+        <circle cx="276" cy="150" r="9" fill="#1b2237" stroke="#f2c14e" stroke-width="3"/>
+        <circle cx="364" cy="150" r="9" fill="#1b2237" stroke="#f2c14e" stroke-width="3"/>
+        <rect x="256" y="236" width="128" height="22" rx="11" fill="#1b2237" stroke="#4fc3b0"/>
+        <text x="320" y="252" text-anchor="middle" fill="#4fc3b0" font-size="12" font-family="sans-serif">选片判断</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="wrap layout">
+  <!-- 左频道索引 -->
+  <aside class="channel-col" id="cats" aria-label="类型频道索引">
+    <div class="side-card">
+      <h4>类型频道</h4>
+      <ul class="chan-list">
+        <li><a href="/#cats">悬疑推理 <small>28</small></a></li>
+        <li><a href="/#cats">犯罪警匪 <small>21</small></a></li>
+        <li><a href="/#cats">科幻设定 <small>19</small></a></li>
+        <li><a href="/#cats">古装历史 <small>24</small></a></li>
+        <li><a href="/#cats">都市情感 <small>17</small></a></li>
+        <li><a href="/#cats">纪录纪实 <small>15</small></a></li>
+        <li><a href="/#cats">动画长片 <small>12</small></a></li>
+        <li><a href="/#cats">华语经典修复 <small>9</small></a></li>
+        <li><a href="/#cats">海外剧集 <small>22</small></a></li>
+        <li><a href="/#cats">短片与实验 <small>8</small></a></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h4>快捷入口</h4>
+      <div class="quick-links">
+        <a href="/#deep">类型差异怎么判断</a>
+        <a href="/#guide">第一次看从哪部起</a>
+        <a href="/#rank">本周口碑榜</a>
+        <a href="/#faq">更新节奏答疑</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="main-col">
+
+    <!-- 1 概览 -->
+    <section class="block" id="overview">
+      <div class="block-head"><h2>影视领域概览：当前值得关注的方向</h2></div>
+      <div class="overview" id="searchPool">
+        <p>懂片帝关注的影视内容大致分四条主干。第一条是院线新片，以华语商业片和进口类型片为主，2026 年 11 月档正在上映的有犯罪片《雾港回声》、科幻片《第二轨道》和家庭片《父亲的胶片》。第二条是剧集，悬疑与犯罪题材仍是更新最密集的品类，海外剧集则在古装与科幻两条线上有明显增长。第三条是经典修复，近年大量 1990—2000 年代的华语片以 4K 修复版重映，<strong>《城南旧事》《一一》《甜蜜蜜》</strong>是讨论度最高的几部。第四条是纪录纪实，自然、社会与人物传记三类最受关注。</p>
+        <p>判断一部片是否值得看，通常看三件事：类型是否对味、主创过往作品是否稳定、口碑分布是两极分化还是整体平稳。评分高不等于适合所有人，例如《第二轨道》在科幻迷中评分 8.4，但节奏偏慢、概念密度高，对只想看动作场面的观众并不友好。反过来，一些评分 7 分左右的都市情感片在特定人群中复看率很高。懂片帝的选片逻辑，是把类型、主创、口碑分布和观影门槛四件事同时说清楚，而不是只给一个分数。</p>
+      </div>
+    </section>
+
+    <!-- 2 精选内容推荐 -->
+    <section class="block" id="picks">
+      <div class="block-head">
+        <h2>精选内容推荐：11 月可看的 8 部片</h2>
+      </div>
+      <p class="block-sub">覆盖院线、剧集与修复重映，每条注明类型与适合人群。</p>
+      <div class="card-grid">
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/wugang-huisdheng01/400/300" alt="雾港回声电影海报封面" width="400" height="300" loading="lazy">
+            <span class="badge">院线</span><span class="heat">热度 96</span>
+          </div>
+          <div class="film-body">
+            <h3>雾港回声</h3>
+            <div class="film-type">犯罪 / 悬疑</div>
+            <p>海港城市连环失踪案，双线叙事在第 40 分钟完成第一次反转，警探与证人视角互相拆台。</p>
+            <div class="tag-row"><span class="tag">双线叙事</span><span class="tag">港城氛围</span><span class="tag">反转密集</span></div>
+            <div class="film-meta"><span class="score">8.1 分</span><span>128 分钟</span></div>
+          </div>
+        </article>
+
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/dier-guidao02/400/300" alt="第二轨道科幻片剧照封面" width="400" height="300" loading="lazy">
+            <span class="badge">院线</span><span class="heat">热度 91</span>
+          </div>
+          <div class="film-body">
+            <h3>第二轨道</h3>
+            <div class="film-type">科幻 / 剧情</div>
+            <p>近未来记忆备份技术普及后，一名工程师发现自己的备份里多了三个月不属于自己的记忆。</p>
+            <div class="tag-row"><span class="tag">硬科幻</span><span class="tag">记忆伦理</span><span class="tag">慢节奏</span></div>
+            <div class="film-meta"><span class="score">8.4 分</span><span>142 分钟</span></div>
+          </div>
+        </article>
+
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/fuqin-jiaopian03/400/300" alt="父亲的胶片家庭片封面" width="400" height="300" loading="lazy">
+            <span class="badge">院线</span><span class="heat">热度 84</span>
+          </div>
+          <div class="film-body">
+            <h3>父亲的胶片</h3>
+            <div class="film-type">家庭 / 剧情</div>
+            <p>县城放映员退休后，儿子整理出一批从未冲洗的胶片，拼出父亲三十年没说过的工作史。</p>
+            <div class="tag-row"><span class="tag">小城叙事</span><span class="tag">父子关系</span><span class="tag">胶片质感</span></div>
+            <div class="film-meta"><span class="score">7.9 分</span><span>116 分钟</span></div>
+          </div>
+        </article>
+
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/wuya-dangan04/400/300" alt="乌鸦档案悬疑剧集封面" width="400" height="300" loading="lazy">
+            <span class="badge">剧集</span><span class="heat">更新至 6 集</span>
+          </div>
+          <div class="film-body">
+            <h3>乌鸦档案</h3>
+            <div class="film-type">悬疑 / 罪案</div>
+            <p>档案管理员与刑警合作翻查旧案，每集解封一个档案袋，主线在第 3 集开始收束。</p>
+            <div class="tag-row"><span class="tag">单元剧</span><span class="tag">旧案重查</span><span class="tag">冷色调</span></div>
+            <div class="film-meta"><span class="score">8.6 分</span><span>12 集 / 每周四更</span></div>
+          </div>
+        </article>
+
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/yi-yi05/400/300" alt="一一修复版重映封面" width="400" height="300" loading="lazy">
+            <span class="badge">修复重映</span><span class="heat">热度 88</span>
+          </div>
+          <div class="film-body">
+            <h3>一一（4K 修复版）</h3>
+            <div class="film-type">剧情 / 家庭</div>
+            <p>杨德昌代表作，一个台北家庭三代人的日常，修复版重新调色后夜景层次明显提升。</p>
+            <div class="tag-row"><span class="tag">华语经典</span><span class="tag">长镜头</span><span class="tag">城市生活</span></div>
+            <div class="film-meta"><span class="score">9.1 分</span><span>173 分钟</span></div>
+          </div>
+        </article>
+
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/tianmi-mi06/400/300" alt="甜蜜蜜修复版重映封面" width="400" height="300" loading="lazy">
+            <span class="badge">修复重映</span><span class="heat">热度 82</span>
+          </div>
+          <div class="film-body">
+            <h3>甜蜜蜜（4K 修复版）</h3>
+            <div class="film-type">爱情 / 剧情</div>
+            <p>九十年代香港与内地移民故事，修复版补回两段被剪掉的街头段落，人物动机更完整。</p>
+            <div class="tag-row"><span class="tag">移民叙事</span><span class="tag">年代感</span><span class="tag">邓丽君</span></div>
+            <div class="film-meta"><span class="score">8.9 分</span><span>118 分钟</span></div>
+          </div>
+        </article>
+
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/beiji-tanxian07/400/300" alt="北极圈手记纪录片封面" width="400" height="300" loading="lazy">
+            <span class="badge">纪录</span><span class="heat">热度 76</span>
+          </div>
+          <div class="film-body">
+            <h3>北极圈手记</h3>
+            <div class="film-type">自然 / 纪录</div>
+            <p>三位科考员在极夜期间驻守观测站，镜头记录了 118 天的光照变化与日常补给。</p>
+            <div class="tag-row"><span class="tag">极地</span><span class="tag">长周期拍摄</span><span class="tag">自然观察</span></div>
+            <div class="film-meta"><span class="score">8.7 分</span><span>96 分钟</span></div>
+          </div>
+        </article>
+
+        <article class="film-card">
+          <div class="cover">
+            <img src="https://picsum.photos/seed/changan-dianying08/400/300" alt="长安夜行古装片封面" width="400" height="300" loading="lazy">
+            <span class="badge">院线</span><span class="heat">热度 79</span>
+          </div>
+          <div class="film-body">
+            <h3>长安夜行</h3>
+            <div class="film-type">古装 / 动作</div>
+            <p>一夜之内横穿长安城的追捕故事，动作设计以巷道短兵为主，服化道细节考究。</p>
+            <div class="tag-row"><span class="tag">单夜叙事</span><span class="tag">巷战</span><span class="tag">唐风</span></div>
+            <div class="film-meta"><span class="score">7.6 分</span><span>134 分钟</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3 最新更新 -->
+    <section class="block" id="updates">
+      <div class="block-head"><h2>最新更新与热播动态</h2></div>
+      <ul class="update-list">
+        <li><span class="time">今天 09:30</span><span class="name">乌鸦档案 <em>新集上线</em></span><span class="kind">剧集</span><span class="desc">第 6 集《第七个档案袋》已上线，本集揭晓管理员姐姐的旧案关联。</span></li>
+        <li><span class="time">今天 08:15</span><span class="name">雾港回声</span><span class="kind">院线</span><span class="desc">排片占比升至 21%，二刷观众增多，反转细节讨论帖单日新增 300 条。</span></li>
+        <li><span class="time">昨天 21:10</span><span class="name">第二轨道</span><span class="kind">院线</span><span class="desc">导演访谈上线，解释片中“记忆备份”设定的三条技术规则。</span></li>
+        <li><span class="time">昨天 18:40</span><span class="name">一一（4K 修复版）</span><span class="kind">修复重映</span><span class="desc">加开场次公布，本周末在 12 个城市增加 36 场。</span></li>
+        <li><span class="time">11 月 7 日</span><span class="name">长安夜行</span><span class="kind">院线</span><span class="desc">动作特辑释出，公开巷道追捕段落的完整拍摄分镜。</span></li>
+        <li><span class="time">11 月 7 日</span><span class="name">北极圈手记</span><span class="kind">纪录</span><span class="desc">第二部《冰下》定档 12 月 5 日，聚焦海冰观测数据变化。</span></li>
+        <li><span class="time">11 月 6 日</span><span class="name">甜蜜蜜（4K 修复版）</span><span class="kind">修复重映</span><span class="desc">修复团队公开调色对比片段，补回两段街头戏。</span></li>
+        <li><span class="time">11 月 5 日</span><span class="name">父亲的胶片</span><span class="kind">院线</span><span class="desc">点映场上座率 78%，胶片冲洗工艺的幕后花絮同步公开。</span></li>
+        <li><span class="time">11 月 4 日</span><span class="name">城南旧事（修复版）</span><span class="kind">修复重映</span><span class="desc">修复版新增 6 分钟片段，导演手记同步整理成专题。</span></li>
+        <li><span class="time">11 月 3 日</span><span class="name">海外剧集《北纬四十七度》</span><span class="kind">剧集</span><span class="desc">第一季全 8 集上线，豆瓣口径评分 8.2，节奏偏慢。</span></li>
+      </ul>
+    </section>
+
+    <!-- 4 分类入口 -->
+    <section class="block" id="cat-entry">
+      <div class="block-head"><h2>按类型找片：8 个高频入口</h2></div>
+      <div class="cat-grid">
+        <a class="cat-item" href="/#picks"><b>悬疑推理</b><span>本格、社会派、单元剧</span></a>
+        <a class="cat-item" href="/#picks"><b>犯罪警匪</b><span>卧底、旧案、港城警匪</span></a>
+        <a class="cat-item" href="/#picks"><b>科幻设定</b><span>硬科幻、近未来、太空</span></a>
+        <a class="cat-item" href="/#picks"><b>古装历史</b><span>唐风、明清、宫廷权谋</span></a>
+        <a class="cat-item" href="/#picks"><b>都市情感</b><span>家庭、职场、移民叙事</span></a>
+        <a class="cat-item" href="/#picks"><b>纪录纪实</b><span>自然、社会、人物传记</span></a>
+        <a class="cat-item" href="/#picks"><b>动画长片</b><span>作者动画、儿童向、实验</span></a>
+        <a class="cat-item" href="/#picks"><b>华语经典修复</b><span>4K 重映、导演剪辑版</span></a>
+      </div>
+    </section>
+
+    <!-- 5 深度解析 -->
+    <section class="block" id="deep">
+      <article class="article">
+        <h2>深度解析：类型差异与选片判断维度</h2>
+        <p>影视内容看起来庞杂，但真正影响观看体验的判断维度并不多。把类型、主创、口碑分布和观影门槛四件事拆开看，大多数“这片值不值得看”的问题都能在两三分钟里得到回答。</p>
+
+        <h3>悬疑与犯罪：叙事结构决定门槛</h3>
+        <p>悬疑片的差异主要在叙事结构。像《乌鸦档案》这样的单元剧，每集解封一个档案袋，单集有独立起落，适合一次看一集的观众；而《雾港回声》这类双线叙事电影，前 40 分钟两条线交替推进，信息密度高，中途走神容易丢失线索。判断自己适不适合看，一个简单方法是看前 20 分钟是否交代了核心案件与人物的关系——如果交代得慢，说明这部片更依赖后半段的集中反转。</p>
+        <p>犯罪警匪片还要看“立场设计”。卧底题材通常把观众放在警方一侧，紧张感来自身份暴露；旧案重查题材则把观众放在知情者一侧，紧张感来自证据链的推进。两种设计对观众的耐心要求不同，前者更依赖情绪，后者更依赖逻辑。</p>
+
+        <h3>科幻：设定密度与情感线比例</h3>
+        <p>科幻片最容易被误判。《第二轨道》在科幻迷中评分 8.4，但它的设定密度很高——记忆备份的技术规则、备份与本人的法律身份、备份删除后的责任归属，三条规则在前 30 分钟全部交代。对习惯边看边推理的观众这是优点，对只想看视觉奇观的观众则可能显得冗长。判断方法很简单：看预告片里有没有出现解释设定的对白，如果有，说明这部片把设定当作主线而非背景。</p>
+        <div class="callout">科幻片的情感线比例也是重要指标。情感线过重会稀释设定，过轻则人物动机不足。7:3 到 6:4 之间通常是多数观众能接受的比例。</div>
+
+        <h3>古装与历史：服化道之外看什么</h3>
+        <p>古装片常被服化道讨论带偏。真正影响观感的是“时间设定与动作设计的匹配”。《长安夜行》把故事压缩在一夜之内，动作设计以巷道短兵为主，这种设计让打斗更贴近空间限制，而不是靠大场面堆砌。反过来，一些古装片用大规模战争场面撑时长，人物关系反而被稀释。看古装片时可以先问：这部片的主要冲突是发生在人之间，还是发生在场面之间。</p>
+
+        <h3>经典修复：修复版值不值得重看</h3>
+        <p>4K 修复版的判断标准与普通重映不同。修复的价值主要在三点：画面层次是否提升、是否补回删减片段、音轨是否重新混录。《一一》修复版的夜景层次提升明显，《甜蜜蜜》修复版补回两段街头段落，《城南旧事》修复版新增 6 分钟片段。如果一部修复版只是简单拉伸分辨率，重看的必要性就低。判断方法可以看修复团队是否公开调色对比片段。</p>
+
+        <h3>纪录片：拍摄周期与观察角度</h3>
+        <p>纪录片的判断维度是拍摄周期与观察角度。《北极圈手记》用 118 天记录极夜变化，长周期拍摄让素材本身具备说服力。观察角度则决定纪录片是“记录现象”还是“记录人”——前者更接近自然观察，后者更接近人物传记。两类没有高下，但观看预期不同，前者适合放松观看，后者需要投入注意力跟随人物情绪。</p>
+
+        <h3>口碑分布：看两极还是看中位数</h3>
+        <p>评分只是入口，分布更重要。一部片如果高分与低分同时集中，说明它存在明显的“口味分水岭”，这类片适合先看类型再决定；如果评分集中在 7 分上下且波动小，说明它整体平稳但缺乏惊喜，适合当作日常消遣。懂片帝在每条片单里同时给出评分、时长和类型标签，就是为了让这个判断更快完成。</p>
+      </article>
+    </section>
+
+    <!-- 6 体验指南 -->
+    <section class="block" id="guide">
+      <div class="block-head"><h2>观影路径：第一次接触怎么排顺序</h2></div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div><h3>先按类型锁定方向</h3><p>不确定看什么时，先选类型而不是选评分。悬疑与犯罪适合想跟着推理的观众，科幻适合能接受设定解释的观众，家庭与都市情感适合放松观看。</p></div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div><h3>再看时长与更新节奏</h3><p>电影 120 分钟上下适合一次看完，剧集要确认更新频率。《乌鸦档案》每周四更新，适合追更；《北纬四十七度》全 8 集已上线，适合一次刷完。</p></div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div><h3>判断观影门槛</h3><p>双线叙事、高设定密度、长镜头较多的片需要更集中的注意力。如果只想轻松看，优先选单线叙事和单元剧结构。</p></div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div><h3>同类条目横向比较</h3><p>同类型里比较主创过往作品和口碑分布。《雾港回声》与《乌鸦档案》同为罪案题材，前者是电影、依赖反转，后者是剧集、依赖单元结构。</p></div>
+        </div>
+        <div class="step">
+          <div class="num">5</div>
+          <div><h3>修复版与老片单独排序</h3><p>经典修复适合放在周末整块时间看，《一一》173 分钟需要预留完整时段；《甜蜜蜜》118 分钟更适合工作日晚间。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 FAQ -->
+    <section class="block" id="faq">
+      <div class="block-head"><h2>常见问答</h2></div>
+      <div class="faq">
+        <details>
+          <summary>《乌鸦档案》这类悬疑剧一般多久更新一次？</summary>
+          <p>目前是每周四更新一集，全 12 集，预计 12 月中旬完结。单元剧结构下每集有独立案件，跳集观看影响不大，但主线线索集中在第 3、6、9 集。</p>
+        </details>
+        <details>
+          <summary>《雾港回声》和《乌鸦档案》有什么区别？</summary>
+          <p>前者是电影，双线叙事、依赖集中反转，128 分钟一次看完；后者是剧集，单元结构、每集一个档案袋，主线缓慢收束。想一次看完选前者，想追更选后者。</p>
+        </details>
+        <details>
+          <summary>第一次接触科幻片，从哪部开始看比较好？</summary>
+          <p>如果没看过硬科幻，建议先从设定密度低的片入手，再过渡到《第二轨道》这类高密度作品。判断标准是预告片里解释设定的对白占比，占比越高门槛越高。</p>
+        </details>
+        <details>
+          <summary>4K 修复版和普通重映有什么不同？</summary>
+          <p>修复版通常涉及画面层次重调、删减片段补回和音轨重混。《一一》《甜蜜蜜》《城南旧事》三部修复版都补回了片段，普通重映一般不做这些处理。</p>
+        </details>
+        <details>
+          <summary>悬疑片的评判标准通常是什么？</summary>
+          <p>主要看三点：线索是否公平给出、反转是否在前文有铺垫、人物动机是否成立。线索藏得太深会让观众失去参与感，反转缺少铺垫则显得刻意。</p>
+        </details>
+        <details>
+          <summary>纪录片适合按什么顺序看？</summary>
+          <p>自然类适合放松观看，人物传记类需要投入注意力。可以先看《北极圈手记》这类长周期自然纪录，再过渡到社会题材，观看预期更容易调整。</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 8 用户评论 -->
+    <section class="block" id="comments">
+      <div class="block-head"><h2>观众评论：关于具体条目</h2></div>
+      <div class="comments">
+        <div class="cmt"><div class="cmt-head"><span class="avatar">林</span><b>林间慢跑</b><time>今天 10:12</time></div><p><b>《雾港回声》</b>第 40 分钟那个反转确实没想到，前面埋的细节二刷才看全。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">周</span><b>周末放映员</b><time>今天 09:40</time></div><p>《第二轨道》设定讲得清楚，但节奏是真的慢，中途差点睡着，科幻迷应该会喜欢。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">陈</span><b>陈年胶片</b><time>昨天 22:05</time></div><p>《一一》修复版夜景层次提升明显，173 分钟坐得住，适合周末整块时间看。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">阿</span><b>阿九不熬夜</b><time>昨天 21:30</time></div><p>《乌鸦档案》第 6 集把姐姐的旧案接上了，前面几集的伏笔终于有回应。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">南</span><b>南城旧事</b><time>昨天 20:18</time></div><p>《甜蜜蜜》补回的两段街头戏很关键，人物动机比原版完整很多。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">小</span><b>小满看片</b><time>11 月 7 日</time></div><p>《长安夜行》的巷战设计不错，但后半段节奏有点赶，人物关系没铺开。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">张</span><b>张同学</b><time>11 月 7 日</time></div><p>《父亲的胶片》点映场看哭了，胶片冲洗那段拍得很细，县城叙事很真实。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">海</span><b>海边散步</b><time>11 月 6 日</time></div><p>《北极圈手记》极夜那段镜头太美了，118 天的记录确实有说服力。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">李</span><b>李子树下</b><time>11 月 6 日</time></div><p>《北纬四十七度》节奏偏慢，第一集差点弃，看到第三集才好起来。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">王</span><b>王家小院</b><time>11 月 5 日</time></div><p>《城南旧事》修复版新增的 6 分钟很值得，老片重看还是有新东西。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">许</span><b>许愿看片</b><time>11 月 5 日</time></div><p>《雾港回声》和《乌鸦档案》都看了，一个是电影一个是剧，观感完全不同。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">赵</span><b>赵小赵</b><time>11 月 4 日</time></div><p>《第二轨道》的设定解释对白太多了，如果能用画面交代会更好。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">孙</span><b>孙叔看片</b><time>11 月 4 日</time></div><p>古装片还是看《长安夜行》这种单夜叙事的舒服，不拖沓。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">吴</span><b>吴家老二</b><time>11 月 3 日</time></div><p>《甜蜜蜜》修复版音轨重混了，邓丽君那几段歌听起来比原版清楚。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">何</span><b>何处看片</b><time>11 月 3 日</time></div><p>《乌鸦档案》单元剧结构挺友好，跳着看也不影响，主线慢慢追就行。</p></div>
+        <div class="cmt"><div class="cmt-head"><span class="avatar">高</span><b>高个子影迷</b><time>11 月 2 日</time></div><p>《父亲的胶片》里冲洗那场戏拍得克制，没有刻意煽情，加分。</p></div>
+      </div>
+    </section>
+
+    <!-- 9 相关资讯 -->
+    <section class="block" id="news">
+      <div class="block-head"><h2>相关资讯</h2></div>
+      <div class="news-list">
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/news-wuya06zixun/600/400" alt="乌鸦档案第6集上线资讯配图" width="600" height="400" loading="lazy">
+          <div class="news-body">
+            <div class="date">2026-11-08</div>
+            <h3>《乌鸦档案》第 6 集上线，姐姐旧案线索接回主线</h3>
+            <p>本集解封第七个档案袋，主线开始从单元案件过渡到管理员的家族旧案，后续三集将集中收束。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/news-yiyi07zixun/600/400" alt="一一4K修复版加场资讯配图" width="600" height="400" loading="lazy">
+          <div class="news-body">
+            <div class="date">2026-11-07</div>
+            <h3>《一一》4K 修复版加开场次，12 城新增 36 场</h3>
+            <p>修复团队公开夜景调色对比片段，加开场次集中在本周末，部分城市增加午夜场。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/news-dier08zixun/600/400" alt="第二轨道导演访谈资讯配图" width="600" height="400" loading="lazy">
+          <div class="news-body">
+            <div class="date">2026-11-06</div>
+            <h3>《第二轨道》导演访谈上线，解释记忆备份三条规则</h3>
+            <p>访谈中说明备份与本人的法律身份设定，并回应观众对“备份删除后责任归属”的疑问。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/news-beiji09zixun/600/400" alt="北极圈手记第二部定档资讯配图" width="600" height="400" loading="lazy">
+          <div class="news-body">
+            <div class="date">2026-11-05</div>
+            <h3>《北极圈手记》第二部定档 12 月 5 日，聚焦海冰观测</h3>
+            <p>第二部《冰下》延续 118 天拍摄周期，记录海冰厚度变化与科考站的日常补给。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/news-changan10zixun/600/400" alt="长安夜行动作特辑资讯配图" width="600" height="400" loading="lazy">
+          <div class="news-body">
+            <div class="date">2026-11-04</div>
+            <h3>《长安夜行》动作特辑释出，公开巷道追捕分镜</h3>
+            <p>特辑展示单夜叙事下的巷道短兵设计，动作指导说明如何用空间限制替代大场面。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/news-chengnan11zixun/600/400" alt="城南旧事修复版新增片段资讯配图" width="600" height="400" loading="lazy">
+          <div class="news-body">
+            <div class="date">2026-11-03</div>
+            <h3>《城南旧事》修复版新增 6 分钟片段，导演手记整理成专题</h3>
+            <p>新增片段补全了原版中被剪掉的一段胡同日常，修复团队同步公开了手记扫描件。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 10 相关推荐 -->
+    <section class="block" id="related">
+      <div class="block-head"><h2>延伸方向与相关片目</h2></div>
+      <div class="rec-tags">
+        <a href="/#picks">社会派悬疑</a>
+        <a href="/#picks">卧底警匪片</a>
+        <a href="/#picks">近未来记忆伦理</a>
+        <a href="/#picks">唐风单夜叙事</a>
+        <a href="/#picks">移民题材爱情片</a>
+        <a href="/#picks">极地自然纪录</a>
+        <a href="/#picks">县城家庭叙事</a>
+        <a href="/#picks">4K 修复重映片单</a>
+      </div>
+    </section>
+
+    <!-- 11 榜单 + 时间线 -->
+    <section class="block" id="rank">
+      <div class="block-head"><h2>本周口碑榜与档期时间线</h2></div>
+      <div class="two-col">
+        <div>
+          <ol class="rank-list">
+            <li><span class="rank-no">1</span><span class="rk-name">一一（4K 修复版）</span><span class="rk-type">9.1</span></li>
+            <li><span class="rank-no">2</span><span class="rk-name">甜蜜蜜（4K 修复版）</span><span class="rk-type">8.9</span></li>
+            <li><span class="rank-no">3</span><span class="rk-name">北极圈手记</span><span class="rk-type">8.7</span></li>
+            <li><span class="rank-no">4</span><span class="rk-name">乌鸦档案</span><span class="rk-type">8.6</span></li>
+            <li><span class="rank-no">5</span><span class="rk-name">第二轨道</span><span class="rk-type">8.4</span></li>
+            <li><span class="rank-no">6</span><span class="rk-name">雾港回声</span><span class="rk-type">8.1</span></li>
+            <li><span class="rank-no">7</span><span class="rk-name">父亲的胶片</span><span class="rk-type">7.9</span></li>
+            <li><span class="rank-no">8</span><span class="rk-name">长安夜行</span><span class="rk-type">7.6</span></li>
+          </ol>
+        </div>
+        <div class="timeline">
+          <div class="tl-item"><b>11 月 8 日 · 《乌鸦档案》第 6 集</b><span>剧集更新</span></div>
+          <div class="tl-item"><b>11 月 8 日 · 《雾港回声》加场</b><span>院线排片</span></div>
+          <div class="tl-item"><b>11 月 9 日 · 《一一》修复版午夜场</b><span>重映场次</span></div>
+          <div class="tl-item"><b>11 月 12 日 · 《乌鸦档案》第 7 集</b><span>剧集更新</span></div>
+          <div class="tl-item"><b>11 月 15 日 · 《甜蜜蜜》修复版加场</b><span>重映场次</span></div>
+          <div class="tl-item"><b>12 月 5 日 · 《北极圈手记·冰下》</b><span>纪录片上线</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 右辅助栏 -->
+  <aside class="aside-right" aria-label="辅助信息">
+    <div class="side-card">
+      <h4>本周热搜片目</h4>
+      <ul class="rank-mini">
+        <li><span class="no">1</span><div>雾港回声<small>反转细节讨论</small></div></li>
+        <li><span class="no">2</span><div>乌鸦档案<small>第 6 集上线</small></div></li>
+        <li><span class="no">3</span><div>第二轨道<small>导演访谈</small></div></li>
+        <li><span class="no">4</span><div>一一 4K 修复版<small>加开场次</small></div></li>
+        <li><span class="no">5</span><div>甜蜜蜜 4K 修复版<small>补回片段</small></div></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h4>选片判断清单</h4>
+      <ul class="rank-mini" style="gap:8px">
+        <li><span class="no">·</span><div>类型是否对味</div></li>
+        <li><span class="no">·</span><div>叙事是单线还是双线</div></li>
+        <li><span class="no">·</span><div>设定解释占比多少</div></li>
+        <li><span class="no">·</span><div>口碑是两极还是平稳</div></li>
+        <li><span class="no">·</span><div>时长是否够整块时间</div></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h4>快捷入口</h4>
+      <div class="quick-links">
+        <a href="/#picks">全部精选片单</a>
+        <a href="/#updates">今日更新动态</a>
+        <a href="/#deep">类型差异解析</a>
+        <a href="/#faq">常见问题</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#151a2e" stroke="#2c3550"/>
+            <path d="M15 19h34v7H15zm0 11h34v7H15zm0 11h21v7H15z" fill="#f2c14e"/>
+            <circle cx="49" cy="46" r="7" fill="#e0563f"/>
+          </svg>
+          <span class="brand-text">懂片<em>帝</em></span>
+        </div>
+        <p>聚焦院线新片、剧集、经典修复与纪录片的解读与选片判断，把类型、主创、口碑和门槛讲清楚。</p>
+      </div>
+      <div class="foot-col">
+        <h4>类型频道</h4>
+        <a href="/#cats">悬疑推理</a>
+        <a href="/#cats">犯罪警匪</a>
+        <a href="/#cats">科幻设定</a>
+        <a href="/#cats">古装历史</a>
+      </div>
+      <div class="foot-col">
+        <h4>内容栏目</h4>
+        <a href="/#picks">精选片单</a>
+        <a href="/#updates">更新动态</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#guide">观影路径</a>
+      </div>
+      <div class="foot-col">
+        <h4>帮助与问答</h4>
+        <a href="/#faq">常见问答</a>
+        <a href="/#news">相关资讯</a>
+        <a href="/#rank">口碑榜</a>
+        <a href="/#related">延伸方向</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 懂片帝 · 影视解读与选片参考</span>
+      <span>部分内容为示例数据，仅用于展示页面结构</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var input = document.getElementById('siteSearch');
+  var btn = document.getElementById('searchBtn');
+  var pool = document.getElementById('searchPool');
+  if(!input || !btn || !pool) return;
+
+  function run(){
+    var kw = input.value.trim().toLowerCase();
+    var cards = document.querySelectorAll('.film-card');
+    var items = document.querySelectorAll('.update-list li, .news-item, .cat-item');
+    if(!kw){
+      cards.forEach(function(c){c.style.display=''});
+      items.forEach(function(i){i.style.display=''});
+      return;
+    }
+    var hit = 0;
+    cards.forEach(function(c){
+      var t = c.textContent.toLowerCase();
+      var ok = t.indexOf(kw) > -1;
+      c.style.display = ok ? '' : 'none';
+      if(ok) hit++;
+    });
+    items.forEach(function(i){
+      var t = i.textContent.toLowerCase();
+      i.style.display = t.indexOf(kw) > -1 ? '' : 'none';
+    });
+    var tip = document.getElementById('searchTip');
+    if(!tip){
+      tip = document.createElement('p');
+      tip.id = 'searchTip';
+      tip.style.cssText = 'font-size:13px;color:#f2c14e;margin:8px 0 0';
+      pool.appendChild(tip);
+    }
+    tip.textContent = hit === 0 && !kw ? '' : (hit === 0 ? '没有找到匹配的片名或类型，换个关键词试试。' : '已筛选出 ' + hit + ' 部相关片目。');
+  }
+
+  btn.addEventListener('click', run);
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); run(); }
+  });
+  input.addEventListener('input', function(){
+    if(input.value === '') run();
+  });
+})();
+</script>
+</body>
+              </html>
